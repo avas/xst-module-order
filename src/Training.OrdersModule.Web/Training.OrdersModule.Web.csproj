@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Training.OrdersModule.Core\Training.OrdersModule.Core.csproj" />
     <ProjectReference Include="..\Training.OrdersModule.Data\Training.OrdersModule.Data.csproj" />
+    <ProjectReference Include="..\Training.OrdersModule.Xapi\Training.OrdersModule.Xapi.csproj" />
   </ItemGroup>
 
 </Project>

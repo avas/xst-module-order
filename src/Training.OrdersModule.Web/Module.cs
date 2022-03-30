@@ -1,4 +1,5 @@
 using System.Linq;
+using GraphQL.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +9,7 @@ using Training.OrdersModule.Core.Models;
 using Training.OrdersModule.Data.Models;
 using Training.OrdersModule.Data.Repositories;
 using Training.OrdersModule.Data.Services;
+using Training.OrdersModule.Xapi.Extensions;
 using VirtoCommerce.OrdersModule.Core.Model;
 using VirtoCommerce.OrdersModule.Core.Model.Search;
 using VirtoCommerce.OrdersModule.Core.Services;
@@ -42,6 +44,19 @@ namespace Training.OrdersModule.Web
             serviceCollection.AddTransient<IOrderRepository, TrainingOrderRepository>();
 
             serviceCollection.AddTransient<ICustomerOrderSearchService, TrainingOrderSearchService>();
+
+            var graphQlBuilder = serviceCollection.AddGraphQL(options =>
+                {
+                    options.EnableMetrics = false;
+                })
+                .AddNewtonsoftJson(deserializerSettings => { }, serializerSettings => { })
+                .AddErrorInfoProvider(options =>
+                {
+                    options.ExposeExtensions = true;
+                    options.ExposeExceptionStackTrace = true;
+                });
+
+            serviceCollection.AddXTrainingOrder(graphQlBuilder);
         }
 
         public void PostInitialize(IApplicationBuilder appBuilder)

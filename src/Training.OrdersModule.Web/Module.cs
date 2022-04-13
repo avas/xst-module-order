@@ -8,13 +8,16 @@ using Training.OrdersModule.Core;
 using Training.OrdersModule.Core.Models;
 using Training.OrdersModule.Data.Models;
 using Training.OrdersModule.Data.Repositories;
+using Training.OrdersModule.Data.Search.Indexed;
 using Training.OrdersModule.Data.Services;
 using Training.OrdersModule.Xapi.Extensions;
+using VirtoCommerce.OrdersModule.Core.Extensions;
 using VirtoCommerce.OrdersModule.Core.Model;
 using VirtoCommerce.OrdersModule.Core.Model.Search;
 using VirtoCommerce.OrdersModule.Core.Services;
 using VirtoCommerce.OrdersModule.Data.Model;
 using VirtoCommerce.OrdersModule.Data.Repositories;
+using VirtoCommerce.OrdersModule.Data.Search.Indexed;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Core.Security;
@@ -44,6 +47,11 @@ namespace Training.OrdersModule.Web
             serviceCollection.AddTransient<IOrderRepository, TrainingOrderRepository>();
 
             serviceCollection.AddTransient<ICustomerOrderSearchService, TrainingOrderSearchService>();
+
+            if (Configuration.IsOrderFullTextSearchEnabled())
+            {
+                serviceCollection.AddSingleton<CustomerOrderDocumentBuilder, TrainingOrderDocumentBuilder>();
+            }
 
             var graphQlBuilder = serviceCollection.AddGraphQL(options =>
                 {

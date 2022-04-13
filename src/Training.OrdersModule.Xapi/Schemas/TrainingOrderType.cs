@@ -10,6 +10,8 @@ namespace Training.OrdersModule.Xapi.Schemas
         public TrainingOrderType(IDynamicPropertyResolverService dynamicPropertyResolverService)
             : base(dynamicPropertyResolverService)
         {
+            Name = nameof(CustomerOrderType);
+
             Field<BooleanGraphType>("loyaltyCalculated", resolve: context => ((TrainingOrder)context.Source?.Order!)?.LoyaltyCalculated ?? false);
         }
     }

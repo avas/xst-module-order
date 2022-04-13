@@ -14,8 +14,6 @@ namespace Training.OrdersModule.Xapi.Extensions
 
             serviceCollection.AddSchemaType<TrainingOrderType>().OverrideType<CustomerOrderType, TrainingOrderType>();
 
-            // TODO: replace the SearchOrderQuery with TrainingSearchOrderQuery when it will be done
-
             return serviceCollection;
         }
     }

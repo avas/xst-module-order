@@ -13,6 +13,8 @@ namespace Training.OrdersModule.Xapi.Schemas
             Name = nameof(CustomerOrderType);
 
             Field<BooleanGraphType>("loyaltyCalculated", resolve: context => ((TrainingOrder)context.Source?.Order!)?.LoyaltyCalculated ?? false);
+            Field<StringGraphType>("pointsOperationId", resolve: context => ((TrainingOrder)context.Source?.Order!)?.PointsOperationId);
+            Field<DecimalGraphType>("loyaltyPointsAmount", resolve: context => ((TrainingOrder)context.Source?.Order!)?.LoyaltyPointsAmount);
         }
     }
 }

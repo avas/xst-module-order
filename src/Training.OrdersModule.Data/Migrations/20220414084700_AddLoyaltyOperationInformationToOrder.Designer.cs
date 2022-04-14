@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Training.OrdersModule.Data.Repositories;
 
@@ -11,9 +12,10 @@ using Training.OrdersModule.Data.Repositories;
 namespace Training.OrdersModule.Data.Migrations
 {
     [DbContext(typeof(TrainingOrderDbContext))]
-    partial class TrainingOrderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220414084700_AddLoyaltyOperationInformationToOrder")]
+    partial class AddLoyaltyOperationInformationToOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

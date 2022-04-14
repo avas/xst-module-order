@@ -10,5 +10,9 @@ namespace Training.OrdersModule.Core.Models
         }
 
         public bool LoyaltyCalculated { get; set; }
+
+        public string PointsOperationId { get; set; }
+
+        public decimal? LoyaltyPointsAmount { get; set; }
     }
 }

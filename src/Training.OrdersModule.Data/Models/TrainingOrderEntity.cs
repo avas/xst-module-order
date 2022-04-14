@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Training.OrdersModule.Core.Models;
 using VirtoCommerce.OrdersModule.Core.Model;
 using VirtoCommerce.OrdersModule.Data.Model;
@@ -9,6 +11,12 @@ namespace Training.OrdersModule.Data.Models
     {
         public bool LoyaltyCalculated { get; set; }
 
+        [StringLength(128)]
+        public string PointsOperationId { get; set; }
+
+        [Column(TypeName = "Money")]
+        public decimal? LoyaltyPointsAmount { get; set; }
+
         public override CustomerOrder ToModel(CustomerOrder order)
         {
             var result = base.ToModel(order);
@@ -16,6 +24,8 @@ namespace Training.OrdersModule.Data.Models
             if (result is TrainingOrder target)
             {
                 target.LoyaltyCalculated = LoyaltyCalculated;
+                target.PointsOperationId = PointsOperationId;
+                target.LoyaltyPointsAmount = LoyaltyPointsAmount;
             }
 
             return result;
@@ -28,6 +38,8 @@ namespace Training.OrdersModule.Data.Models
             if (order is TrainingOrder source)
             {
                 LoyaltyCalculated = source.LoyaltyCalculated;
+                PointsOperationId = source.PointsOperationId;
+                LoyaltyPointsAmount = source.LoyaltyPointsAmount;
             }
 
             return result;
@@ -40,6 +52,8 @@ namespace Training.OrdersModule.Data.Models
             if (target is TrainingOrderEntity trainingOrderEntity)
             {
                 trainingOrderEntity.LoyaltyCalculated = LoyaltyCalculated;
+                trainingOrderEntity.PointsOperationId = PointsOperationId;
+                trainingOrderEntity.LoyaltyPointsAmount = LoyaltyPointsAmount;
             }
         }
     }
